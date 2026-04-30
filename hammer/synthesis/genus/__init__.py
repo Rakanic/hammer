@@ -330,7 +330,8 @@ set_db hinst:{inst} .preserve true
 """.format(inst=pc.path, top=self.top_module, master=pc.master))
 
     def syn_generic(self) -> bool:
-        # Add clock mapping flow if special cells are specified
+        # Add clock mapping flow if special cells are specified)
+        self.append("ungroup -flatten -all")
         if self.version() >= self.version_number("211"):
             buffer_cells = self.technology.get_special_cell_by_type(CellType.CTSBuffer)
             if len(buffer_cells) > 0:
@@ -432,6 +433,10 @@ set_db hinst:{inst} .preserve true
 
         # Write reports does not normally report unconstrained paths
         self.verbose_append("report_timing -unconstrained -max_paths 50 > reports/final_unconstrained.rpt")
+
+        # power reports
+        self.verbose_append("compute_power")
+        self.verbose_append("report_power > reports/power_result.rpt")
 
         return True
 
