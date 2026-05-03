@@ -451,6 +451,8 @@ synthesis.inputs:
   input_files: [] # Input files.
   # Typically a list of Verilog/VHDL files, depending on the synthesis tool.
 
+  include_src_dir: null # Include directory for HDL files
+
   defines: [] # Define options passed when reading HDL
   # type: List[str]
 

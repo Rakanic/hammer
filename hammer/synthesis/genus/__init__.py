@@ -255,6 +255,11 @@ class Genus(HammerSynthesisTool, CadenceTool):
         ], hammer_tech.HammerTechnologyUtils.to_plain_item)
 
         # Read the RTL.
+        rtl_include_dir = self.get_setting("synthesis.inputs.include_src_dir")
+        if len(rtl_include_dir) == 1 and rtl_include_dir[0] != None:
+            include_d = os.path.join(os.getcwd(), rtl_include_dir[0])
+            verbose_append("set_db init_hdl_search_path {include_dir}".format(include_dir=include_d))
+        
         verbose_append("read_hdl {DEFINES} -sv {{ {FILES} }}".format(
             DEFINES=" ".join(["-define "+define for define in self.get_setting("synthesis.inputs.defines",[])]),
             FILES=" ".join(abspath_input_files)))
