@@ -256,7 +256,7 @@ class Genus(HammerSynthesisTool, CadenceTool):
 
         # Read the RTL.
         rtl_include_dir = self.get_setting("synthesis.inputs.include_src_dir")
-        if len(rtl_include_dir) == 1 and rtl_include_dir[0] != None:
+        if rtl_include_dir and len(rtl_include_dir) == 1 and rtl_include_dir[0] != None:
             include_d = os.path.join(os.getcwd(), rtl_include_dir[0])
             verbose_append("set_db init_hdl_search_path {include_dir}".format(include_dir=include_d))
         
